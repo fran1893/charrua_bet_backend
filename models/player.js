@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Player.init(
     {
-      name: DataTypes.STRING,
       balance: DataTypes.DECIMAL,
       user_id: DataTypes.INTEGER,
     },

@@ -11,6 +11,7 @@ module.exports = {
       },
       amount: {
         type: Sequelize.DECIMAL,
+        allowNull: false,
       },
       workspace_id: {
         type: Sequelize.INTEGER,

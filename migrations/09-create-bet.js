@@ -11,9 +11,11 @@ module.exports = {
       },
       amount: {
         type: Sequelize.DECIMAL,
+        allowNull: false,
       },
       player_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "players",
           key: "id",
@@ -21,6 +23,7 @@ module.exports = {
       },
       game_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "games",
           key: "id",
@@ -28,6 +31,7 @@ module.exports = {
       },
       team_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "teams",
           key: "id",
@@ -35,6 +39,7 @@ module.exports = {
       },
       payment_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: "payments",
           key: "id",

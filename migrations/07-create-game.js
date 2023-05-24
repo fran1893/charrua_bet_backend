@@ -11,9 +11,11 @@ module.exports = {
       },
       home_team_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       away_team_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
       },
       result: {
         type: Sequelize.ENUM("home", "away", "draw", "no result"),

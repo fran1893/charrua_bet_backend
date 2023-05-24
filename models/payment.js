@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Payment.init(
     {
-      amount: DataTypes.DECIMAL,
+      amount: DataTypes.DECIMAL(11, 2),
       workspace_id: DataTypes.INTEGER,
       game_id: DataTypes.INTEGER,
     },

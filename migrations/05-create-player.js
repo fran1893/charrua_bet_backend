@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       balance: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.DECIMAL(11, 2),
       },
       user_id: {
         type: Sequelize.INTEGER,

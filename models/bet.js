@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Bet.init(
     {
-      amount: DataTypes.DECIMAL,
+      amount: DataTypes.DECIMAL(11, 2),
       player_id: DataTypes.INTEGER,
       game_id: DataTypes.INTEGER,
       team_id: DataTypes.INTEGER,

@@ -2,34 +2,22 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("bets", {
+    await queryInterface.createTable("players", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      amount: {
+      balance: {
         type: Sequelize.DECIMAL,
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        unique: true,
         references: {
           model: "users",
-          key: "id",
-        },
-      },
-      gameId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "games",
-          key: "id",
-        },
-      },
-      teamId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "teams",
           key: "id",
         },
       },
@@ -44,6 +32,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("bets");
+    await queryInterface.dropTable("players");
   },
 };

@@ -8,17 +8,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Bet.belongsTo(models.User, { foreignKey: "userId" });
-      Bet.belongsTo(models.Game, { foreignKey: "gameId" });
-      Bet.hasOne(models.Payment, { foreignKey: "betId" });
+      Bet.belongsTo(models.Player, { foreignKey: "player_id" });
+      Bet.belongsTo(models.Game, { foreignKey: "game_id" });
+      Bet.belongsTo(models.Game, { foreignKey: "team_id" });
+      Bet.belongsTo(models.Game, { foreignKey: "payment_id" });
     }
   }
   Bet.init(
     {
       amount: DataTypes.DECIMAL,
-      userId: DataTypes.INTEGER,
-      gameId: DataTypes.INTEGER,
-      teamId: DataTypes.INTEGER,
+      player_id: DataTypes.INTEGER,
+      game_id: DataTypes.INTEGER,
+      team_id: DataTypes.INTEGER,
+      payment_id: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Workspace.hasMany(models.User, { foreignKey: "workspaceId" });
+      Workspace.hasMany(models.User, { foreignKey: "workspace_id" });
     }
   }
   Workspace.init(

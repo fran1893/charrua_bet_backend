@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Game.hasMany(models.Bet, { foreignKey: "gameId" });
+      Game.hasMany(models.Bet, { foreignKey: "game_id" });
     }
   }
   Game.init(
     {
-      homeTeam: DataTypes.STRING,
-      awayTeam: DataTypes.STRING,
-      result: DataTypes.STRING,
+      home_team_id: DataTypes.STRING,
+      away_team_id: DataTypes.STRING,
+      result: DataTypes.ENUM("home", "away", "draw", "no result"),
       finished: DataTypes.BOOLEAN,
     },
     {

@@ -2,38 +2,44 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("users", {
+    await queryInterface.createTable("bets", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
+      amount: {
+        type: Sequelize.DECIMAL,
       },
-      lastname: {
-        type: Sequelize.STRING,
-      },
-      password: {
-        type: Sequelize.STRING,
-      },
-      email: {
-        type: Sequelize.STRING,
-      },
-      workspace_id: {
+      player_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: "workspaces",
+          model: "players",
           key: "id",
         },
       },
-      role: {
-        type: Sequelize.ENUM("admin", "player"),
-        allowNull: false,
+      game_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "games",
+          key: "id",
+        },
       },
-
+      team_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "teams",
+          key: "id",
+        },
+      },
+      payment_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "payments",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -45,6 +51,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("users");
+    await queryInterface.dropTable("bets");
   },
 };

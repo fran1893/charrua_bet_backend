@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       home_team_id: DataTypes.STRING,
       away_team_id: DataTypes.STRING,
       result: DataTypes.ENUM("home", "away", "draw", "no result"),
-      finished: DataTypes.BOOLEAN,
+      finished: DataTypes.ENUM("true", "false"),
     },
     {
       sequelize,

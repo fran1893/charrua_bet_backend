@@ -22,7 +22,8 @@ module.exports = {
         defaultValue: "no result",
       },
       finished: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.ENUM("true", "false"),
+        defaultValue: "false",
       },
       createdAt: {
         allowNull: false,

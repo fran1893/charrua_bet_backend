@@ -1,23 +1,25 @@
 {
-  "name": "y",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "charrua-bet-backend",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin.www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fran1893/charrua_bet_backend.git"
-  },
-  "author": "Francisco Diaz",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/fran1893/charrua_bet_backend/issues"
-  },
-  "homepage": "https://github.com/fran1893/charrua_bet_backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^9.0.0",
+    "morgan": "~1.9.1",
     "mysql2": "^3.3.2",
     "sequelize": "^6.31.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }

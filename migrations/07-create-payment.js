@@ -17,9 +17,18 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'workspaces',
-          key: 'id'
-        }},
+          model: "workspaces",
+          key: "id",
+        },
+      },
+      game_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "games",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

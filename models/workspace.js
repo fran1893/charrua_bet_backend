@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Workspace",
+      tableName: "workspaces"
     }
   );
   return Workspace;

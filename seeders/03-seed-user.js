@@ -1,4 +1,6 @@
 "use strict";
+const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,7 +11,7 @@ module.exports = {
         {
           name: "Antonio",
           lastname: "Rudiger",
-          password: "12345678",
+          password: bcrypt.hashSync("12345678", 10),
           email: "antonio@antonio.com",
           workspace_id: 1,
           role: "player",
@@ -19,7 +21,7 @@ module.exports = {
         {
           name: "Walter",
           lastname: "Nelson",
-          password: "12345678",
+          password: bcrypt.hashSync("12345678", 10),
           email: "walter@walter.com",
           workspace_id: 2,
           role: "player",
@@ -29,7 +31,7 @@ module.exports = {
         {
           name: "Alfredo",
           lastname: "Mansala",
-          password: "12345678",
+          password: bcrypt.hashSync("12345678", 10),
           email: "alfredo@alfredo.com",
           workspace_id: 3,
           role: "player",
@@ -39,7 +41,7 @@ module.exports = {
         {
           name: "Francisco",
           lastname: "Diaz",
-          password: "12345678",
+          password: bcrypt.hashSync("12345678", 10),
           email: "francisco@francisco.com",
           workspace_id: 1,
           role: "admin",
@@ -49,7 +51,7 @@ module.exports = {
         {
           name: "Daniel",
           lastname: "Rubial",
-          password: "12345678",
+          password: bcrypt.hashSync("12345678", 10),
           email: "daniel@daniel",
           workspace_id: 2,
           role: "admin",
@@ -59,7 +61,7 @@ module.exports = {
         {
           name: "Alfonso",
           lastname: "Cuarón",
-          password: "12345678",
+          password: bcrypt.hashSync("12345678", 10),
           email: "alfonso@alfonso",
           workspace_id: 3,
           role: "admin",

@@ -27,11 +27,12 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete("workspaces", {
+      [Op.or]: [
+        { name: "Bet Barcelona" },
+        { name: "Apuestas Uruguay" },
+        { name: "Bet Estados Unidos" },
+      ],
+    });
   },
 };

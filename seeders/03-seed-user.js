@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
       "users",
       [
         {
           name: "Antonio",
-          lastname:"Rudiger",
+          lastname: "Rudiger",
           password: "12345678",
           email: "antonio@antonio.com",
           workspace_id: 1,
@@ -18,7 +18,7 @@ module.exports = {
         },
         {
           name: "Walter",
-          lastname:"Nelson",
+          lastname: "Nelson",
           password: "12345678",
           email: "walter@walter.com",
           workspace_id: 2,
@@ -28,7 +28,7 @@ module.exports = {
         },
         {
           name: "Alfredo",
-          lastname:"Mansala",
+          lastname: "Mansala",
           password: "12345678",
           email: "alfredo@alfredo.com",
           workspace_id: 3,
@@ -38,7 +38,7 @@ module.exports = {
         },
         {
           name: "Francisco",
-          lastname:"Diaz",
+          lastname: "Diaz",
           password: "12345678",
           email: "francisco@francisco.com",
           workspace_id: 1,
@@ -48,7 +48,7 @@ module.exports = {
         },
         {
           name: "Daniel",
-          lastname:"Rubial",
+          lastname: "Rubial",
           password: "12345678",
           email: "daniel@daniel",
           workspace_id: 2,
@@ -58,7 +58,7 @@ module.exports = {
         },
         {
           name: "Alfonso",
-          lastname:"Cuarón",
+          lastname: "Cuarón",
           password: "12345678",
           email: "alfonso@alfonso",
           workspace_id: 3,
@@ -71,12 +71,9 @@ module.exports = {
     );
   },
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("users", {
+      [Op.or]: [{ workspace_id: 1 }, { workspace_id: 2 }, { workspace_id: 3 }],
+    });
+  },
 };

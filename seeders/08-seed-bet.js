@@ -30,11 +30,8 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete("bets", {
+      [Op.or]: [{ player_id: 1 }, { player_id: 2 }],
+    });
   },
 };

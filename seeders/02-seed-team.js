@@ -42,11 +42,15 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete("teams", {
+      [Op.or]: [
+        { name: "Real Madrid" },
+        { name: "Atlético de madrid" },
+        { name: "Chelsea FC" },
+        { name: "Leeds United" },
+        { name: "Arsenal" },
+        { name: "AFC Bournemount" },
+      ],
+    });
   },
 };

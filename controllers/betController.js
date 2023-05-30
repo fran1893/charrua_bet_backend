@@ -1,4 +1,12 @@
-const { Player, Bet, Payment, Workspace, Game, Team } = require("../models");
+const {
+  Player,
+  User,
+  Bet,
+  Payment,
+  Workspace,
+  Game,
+  Team,
+} = require("../models");
 
 const {
   sendSuccsessResponse,
@@ -23,6 +31,7 @@ betController.historyUser = async (req, res) => {
           "game_id",
           "team_id",
           "payment_id",
+          "workspace_id",
           "createdAt",
           "updatedAt",
         ],
@@ -39,22 +48,80 @@ betController.historyUser = async (req, res) => {
               "updatedAt",
             ],
           },
-          include: {
-            model: Workspace,
-            attributes: {
-              exclude: ["id", "createdAt", "updatedAt"],
-            },
+        },
+        {
+          model: Workspace,
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
           },
         },
         {
           model: Game,
           attributes: {
+            exclude: ["home_team_id", "away_team_id", "createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: Team,
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+    if (!bets) {
+      return sendErrorResponse(res, 404, errorMsg.bet.NOTFOUND);
+    }
+
+    sendSuccsessResponse(res, 200, bets);
+  } catch (error) {
+    return sendErrorResponse(res, 500, errorMsg.bet.GETALL, error);
+  }
+};
+
+// SHOW BET HISTORY OF THE WORKSPACE (ADMIN)
+betController.historyAdmin = async (req, res) => {
+  try {
+    const bets = await Bet.findAll({
+      where: { workspace_id: req.user_workspace },
+      attributes: {
+        exclude: [
+          "player_id",
+          "game_id",
+          "team_id",
+          "payment_id",
+          "workspace_id",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+      include: [
+        {
+          model: Player,
+          attributes: {
+            exclude: ["user_id", "balance", "createdAt", "updatedAt"],
+          },
+          include: {
+            model: User,
+            attributes: ["name", "email"],
+          },
+        },
+        {
+          model: Payment,
+          attributes: {
             exclude: [
-              "home_team_id",
-              "away_team_id",
+              "id",
+              "workspace_id",
+              "game_id",
               "createdAt",
               "updatedAt",
             ],
+          },
+        },
+        {
+          model: Game,
+          attributes: {
+            exclude: ["home_team_id", "away_team_id", "createdAt", "updatedAt"],
           },
         },
         {

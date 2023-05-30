@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Player } = require("../models");
 
 const {
   sendSuccsessResponse,
@@ -32,11 +32,12 @@ authController.login = async (req, res) => {
     if (!isValidPassword) {
       return sendErrorResponse(res, 404, errorMsg.authorization.BADCREDENTIALS);
     }
-    
+
     const token = generateToken({
       user_id: user.id,
       user_role: user.role,
       user_name: user.name,
+      user_workspace: user.workspace_id,
     });
 
     sendSuccsessResponse(res, 200, {
@@ -48,4 +49,34 @@ authController.login = async (req, res) => {
     sendErrorResponse(res, 500, errorMsg.authorization.LOGINFAILED, error);
   }
 };
+
+// REGISTRAR USUARIO (ADMIN)
+authController.register = async (req, res) => {
+  const { name, email, lastname, password } = req.body;
+  const workspace_id = req.user_workspace;
+
+  if (!isPasswordValidLength(password)) {
+    return sendErrorResponse(res, 400, errorMsg.user.PASSWORDLEN);
+  }
+
+  const encryptedPassword = hash(password);
+
+  const newUser = {
+    name,
+    lastname,
+    password: encryptedPassword,
+    email,
+    workspace_id: workspace_id,
+    role: "player",
+  };
+
+  try {
+    let newPlayer = await User.create(newUser);
+    await Player.create({ user_id: newPlayer.id, balance: 0 });
+    sendSuccsessResponse(res, 201, successMsg.user.CREATE);
+  } catch (error) {
+    sendErrorResponse(res, 500, errorMsg.user.CREATE, error);
+  }
+};
+
 module.exports = authController;

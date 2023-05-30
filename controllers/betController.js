@@ -1,0 +1,85 @@
+const { Player, Bet, Payment, Workspace, Game, Team } = require("../models");
+
+const {
+  sendSuccsessResponse,
+  sendErrorResponse,
+} = require("../_util/sendResponse");
+const { errorMsg, successMsg } = require("../_util/messages");
+
+const betController = {};
+
+// SHOW BET HISTORY USER
+betController.historyUser = async (req, res) => {
+  try {
+    let player = await Player.findOne({
+      where: { user_id: req.user_id },
+    });
+
+    let bets = await Bet.findAll({
+      where: { player_id: player.id },
+      attributes: {
+        exclude: [
+          "player_id",
+          "game_id",
+          "team_id",
+          "payment_id",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+      include: [
+        {
+          model: Payment,
+          attributes: {
+            exclude: [
+              "id",
+              "workspace_id",
+              "game_id",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+          include: {
+            model: Workspace,
+            attributes: {
+              exclude: ["id", "createdAt", "updatedAt"],
+            },
+          },
+        },
+        {
+          model: Game,
+          attributes: {
+            exclude: [
+              "id",
+              "home_team_id",
+              "away_team_id",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+          include: {
+            model: Team,
+            attributes: {
+              exclude: ["id", "createdAt", "updatedAt"],
+            },
+          },
+        },
+        {
+          model: Team,
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+    if (!bets) {
+      return sendErrorResponse(res, 404, errorMsg.bet.NOTFOUND);
+    }
+
+    sendSuccsessResponse(res, 200, bets);
+  } catch (error) {
+    return sendErrorResponse(res, 500, errorMsg.bet.GETALL, error);
+  }
+};
+
+module.exports = betController;

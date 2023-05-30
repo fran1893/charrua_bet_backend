@@ -52,7 +52,7 @@ module.exports = {
           name: "Daniel",
           lastname: "Rubial",
           password: bcrypt.hashSync("12345678", 10),
-          email: "daniel@daniel",
+          email: "daniel@daniel.com",
           workspace_id: 2,
           role: "admin",
           createdAt: new Date(),

@@ -23,6 +23,14 @@ const errorMsg = {
     REQUIERED: "Email and Password are required",
     LOGINFAILED: "User login failed",
   },
+  bet: {
+    CREATE: "Error creating bet",
+    UPDATE: "Error updating bet",
+    DELETE: "Error deleting bet",
+    GETALL: "Error retreiving bet history",
+    GET: "Error retreiving bet",
+    NOTFOUND: "Bets not found"
+  }
 };
 
 const successMsg = {
@@ -34,6 +42,11 @@ const successMsg = {
   },
   authorization: {
     LOGIN: "User login successfull"
+  },
+  bet: {
+    CREATE: "Bet created successfully",
+    UPDATE: "Bet updated successfully",
+    DELETE: "Bet deleted successfully",
   }
 };
 

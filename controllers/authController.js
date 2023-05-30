@@ -40,7 +40,7 @@ authController.login = async (req, res) => {
     });
 
     sendSuccsessResponse(res, 200, {
-      message: "User login succesfull",
+      message: successMsg.authorization.LOGIN,
       token: token,
       role: user.role,
     });

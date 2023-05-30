@@ -32,6 +32,9 @@ const successMsg = {
     DELETEALL: "All users deleted succesfully",
     DELETE: "User deleted successfully",
   },
+  authorization: {
+    LOGIN: "User login successfull"
+  }
 };
 
 module.exports = {

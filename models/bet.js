@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Bet.belongsTo(models.Game, { foreignKey: "game_id" });
       Bet.belongsTo(models.Team, { foreignKey: "team_id" });
       Bet.belongsTo(models.Payment, { foreignKey: "payment_id" });
+      Bet.belongsTo(models.Workspace, { foreignKey: "workspace_id" });
     }
   }
   Bet.init(
@@ -21,11 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       game_id: DataTypes.INTEGER,
       team_id: DataTypes.INTEGER,
       payment_id: DataTypes.INTEGER,
+      workspace_id: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Bet",
-      tableName: "bets"
+      tableName: "bets",
     }
   );
   return Bet;

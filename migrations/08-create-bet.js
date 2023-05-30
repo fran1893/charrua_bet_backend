@@ -45,6 +45,14 @@ module.exports = {
           key: "id",
         },
       },
+      workspace_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "workspaces",
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Workspace.hasMany(models.User, { foreignKey: "workspace_id" });
+      Workspace.hasMany(models.Payment, { foreignKey: "workspace_id" });
+      Workspace.hasMany(models.Bet, {foreignKey: "workspace_id"})
     }
   }
   Workspace.init(

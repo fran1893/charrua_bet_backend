@@ -9,9 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.belongsTo(models.Workspace, { foreignKey: "workspace_id" });
-      User.hasOne(models.Player, { foreignKey: "user_id" });
-      User.hasOne(models.Administrator, { foreignKey: "user_id" });
-      User.hasMany(models.Bet, { foreignKey: "user_id" });
+      User.hasMany(models.Player, { foreignKey: "user_id" });
+      User.hasMany(models.Administrator, { foreignKey: "user_id" });
     }
   }
   User.init(

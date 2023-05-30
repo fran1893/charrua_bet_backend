@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Game.hasMany(models.Bet, { foreignKey: "game_id" });
+      Game.belongsTo(models.Team, { foreignKey: "home_team_id" });
+      Game.belongsTo(models.Team, { foreignKey: "away_team_id" });
     }
   }
   Game.init(
@@ -21,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Game",
-      tableName: "games"
+      tableName: "games",
     }
   );
   return Game;

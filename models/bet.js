@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Bet.belongsTo(models.Player, { foreignKey: "player_id" });
       Bet.belongsTo(models.Game, { foreignKey: "game_id" });
-      Bet.belongsTo(models.Game, { foreignKey: "team_id" });
-      Bet.belongsTo(models.Game, { foreignKey: "payment_id" });
+      Bet.belongsTo(models.Team, { foreignKey: "team_id" });
+      Bet.belongsTo(models.Payment, { foreignKey: "payment_id" });
     }
   }
   Bet.init(

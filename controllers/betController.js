@@ -50,18 +50,11 @@ betController.historyUser = async (req, res) => {
           model: Game,
           attributes: {
             exclude: [
-              "id",
               "home_team_id",
               "away_team_id",
               "createdAt",
               "updatedAt",
             ],
-          },
-          include: {
-            model: Team,
-            attributes: {
-              exclude: ["id", "createdAt", "updatedAt"],
-            },
           },
         },
         {

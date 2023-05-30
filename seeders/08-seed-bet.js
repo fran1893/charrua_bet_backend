@@ -25,6 +25,15 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          amount: 100,
+          player_id: 2,
+          game_id: 2,
+          team_id: 4,
+          payment_id: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

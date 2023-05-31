@@ -29,8 +29,12 @@ const errorMsg = {
     DELETE: "Error deleting bet",
     GETALL: "Error retreiving bet history",
     GET: "Error retreiving bet",
-    NOTFOUND: "Bets not found"
-  }
+    NOTFOUND: "Bets not found",
+  },
+  balance: {
+    UPDATE: "Error updating balance",
+    REQUIRED: "Complete balance field correctly"
+  },
 };
 
 const successMsg = {
@@ -41,12 +45,15 @@ const successMsg = {
     DELETE: "User deleted successfully",
   },
   authorization: {
-    LOGIN: "User login successfull"
+    LOGIN: "User login successfull",
   },
   bet: {
     CREATE: "Bet created successfully",
     UPDATE: "Bet updated successfully",
     DELETE: "Bet deleted successfully",
+  },
+  balance: {
+    UPDATE: "Updated balance successfully"
   }
 };
 

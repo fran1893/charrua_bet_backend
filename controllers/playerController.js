@@ -17,6 +17,12 @@ playerController.getPlayerInfo = async (req, res) => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      include:{
+        model: User,
+        attributes: {
+          exclude: ["password","createdAt", "updatedAt"]
+        }
+      }
     });
 
     sendSuccsessResponse(res, 200, player);

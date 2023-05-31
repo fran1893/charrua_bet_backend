@@ -160,7 +160,7 @@ betController.makeBet = async (req, res) => {
       workspace_id: workspace_id,
     });
 
-   return sendSuccsessResponse(res, 200, newBet);
+   return sendSuccsessResponse(res, 200, successMsg.bet.CREATE);
   } catch (error) {
     return sendErrorResponse(res, 500, errorMsg.bet.CREATE, error);
   }

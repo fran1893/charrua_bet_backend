@@ -5,14 +5,16 @@ const isPlayer = require("../middlewares/isPlayer");
 
 const router = require("express").Router();
 
-// OBTENER TODAS LAS APUESTAS (USUARIO)
+// GET ALL BEYS (PLAYER)
 router.get("/history-user", verifyToken, isPlayer, betController.historyUser);
-// OBTENER TODAS LAS APUESTAS DEL WORKSPACE (ADMIN)
+// GET ALL WORKSPACE BETS (ADMIN)
 router.get(
   "/history-workspace",
   verifyToken,
   isAdmin,
   betController.historyAdmin
 );
+// MAKE A BET (PLAYER)
+router.post("/bet", verifyToken, isPlayer, betController.makeBet);
 
 module.exports = router;

@@ -142,4 +142,28 @@ betController.historyAdmin = async (req, res) => {
   }
 };
 
+// MAKE A BET (PLAYER)
+betController.makeBet = async (req, res) => {
+  try {
+    const { amount, game_id, team_id, payment_id } = req.body;
+    const workspace_id = req.user_workspace;
+    const player = await Player.findOne({
+      where: { user_id: req.user_id },
+    });
+
+    const newBet = await Bet.create({
+      amount: amount,
+      player_id: player.id,
+      game_id: game_id,
+      team_id: team_id,
+      payment_id: payment_id,
+      workspace_id: workspace_id,
+    });
+
+   return sendSuccsessResponse(res, 200, newBet);
+  } catch (error) {
+    return sendErrorResponse(res, 500, errorMsg.bet.CREATE, error);
+  }
+};
+
 module.exports = betController;

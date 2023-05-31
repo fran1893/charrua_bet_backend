@@ -3,7 +3,8 @@ const router = express.Router();
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
-const betRouter = require("./routes/bets")
+const betRouter = require("./routes/bets");
+const playerRouter = require("./routes/player");
 
 /* home page */
 router.use("/", indexRouter);
@@ -12,6 +13,8 @@ router.use("/", indexRouter);
 router.use("/auth", authRouter);
 
 /* bets */
-router.use("/bets", betRouter)
+router.use("/bets", betRouter);
+/* balance */
+router.use("/player", playerRouter);
 
 module.exports = router;

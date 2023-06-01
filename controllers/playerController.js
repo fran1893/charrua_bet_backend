@@ -1,4 +1,5 @@
 const { Player, User } = require("../models");
+const { Op } = require("sequelize");
 
 const {
   sendSuccsessResponse,
@@ -17,17 +18,37 @@ playerController.getPlayerInfo = async (req, res) => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
-      include:{
+      include: {
         model: User,
         attributes: {
-          exclude: ["password","createdAt", "updatedAt"]
-        }
-      }
+          exclude: ["password", "createdAt", "updatedAt"],
+        },
+      },
     });
 
     sendSuccsessResponse(res, 200, player);
   } catch (error) {
     return sendErrorResponse(res, 500, errorMsg.user.GET);
+  }
+};
+// GET ALL PLAYERS INFO FROM THE SAME WORSKPACE  (ADMIN)
+playerController.getAllPlayers = async (req, res) => {
+  try {
+    const players = await User.findAll({
+      where: { workspace_id: req.user_workspace, id: { [Op.ne]: req.user_id } },
+      attributes: {
+        exclude: ["password", "workspace_id", "role", "createdAt", "updatedAt"],
+      },
+      include: {
+        model: Player,
+        attributes: {
+          exclude: ["user_id", "createdAt", "updatedAt"],
+        },
+      },
+    });
+    return sendSuccsessResponse(res, 200, players);
+  } catch (error) {
+    return sendErrorResponse(res, 500, errorMsg.user.GETALL);
   }
 };
 

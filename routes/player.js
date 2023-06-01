@@ -7,7 +7,19 @@ const router = require("express").Router();
 
 // GET PLAYER INFO
 router.get("/info", verifyToken, isPlayer, playerController.getPlayerInfo);
+// GET ALL PLAYERS INFO BY WORKSPACE (ADMIN)
+router.get(
+  "/players_info",
+  verifyToken,
+  isAdmin,
+  playerController.getAllPlayers
+);
 // UPDATE PLAYER BALANCE (ADMIN)
-router.put("/balance/:id_player", verifyToken, isAdmin, playerController.updateBalance);
+router.put(
+  "/balance/:id_player",
+  verifyToken,
+  isAdmin,
+  playerController.updateBalance
+);
 
 module.exports = router;

@@ -89,7 +89,7 @@ paymentController.getPayments = async (req, res) => {
         {
           model: Game,
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ["home_team_id", "away_team_id", "createdAt", "updatedAt"],
           },
           include: [
             {

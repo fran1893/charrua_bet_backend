@@ -60,6 +60,22 @@ betController.historyUser = async (req, res) => {
           attributes: {
             exclude: ["home_team_id", "away_team_id", "createdAt", "updatedAt"],
           },
+          include: [
+            {
+              model: Team,
+              as: "home_team",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+            {
+              model: Team,
+              as: "away_team",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
         },
         {
           model: Team,
@@ -123,6 +139,22 @@ betController.historyAdmin = async (req, res) => {
           attributes: {
             exclude: ["home_team_id", "away_team_id", "createdAt", "updatedAt"],
           },
+          include: [
+            {
+              model: Team,
+              as: "home_team",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+            {
+              model: Team,
+              as: "away_team",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
         },
         {
           model: Team,
@@ -160,7 +192,7 @@ betController.makeBet = async (req, res) => {
       workspace_id: workspace_id,
     });
 
-   return sendSuccsessResponse(res, 200, successMsg.bet.CREATE);
+    return sendSuccsessResponse(res, 200, successMsg.bet.CREATE);
   } catch (error) {
     return sendErrorResponse(res, 500, errorMsg.bet.CREATE, error);
   }

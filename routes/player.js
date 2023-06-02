@@ -21,5 +21,12 @@ router.put(
   isAdmin,
   playerController.updateBalance
 );
+// DELETE PLAYER (ADMIN)
+router.delete(
+  "/delete/:id_player",
+  verifyToken,
+  isAdmin,
+  playerController.deletePlayer
+);
 
 module.exports = router;

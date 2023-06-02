@@ -1,4 +1,4 @@
-const { Player, User } = require("../models");
+const { Player, User, Bet } = require("../models");
 const { Op } = require("sequelize");
 
 const {
@@ -75,7 +75,34 @@ playerController.updateBalance = async (req, res) => {
       sendErrorResponse(res, 404, errorMsg.authorization.NOAUTH);
     }
   } catch (error) {
-    sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
+    sendErrorResponse(res, 500, errorMsg.balance.UPDATE, error);
+  }
+};
+
+// DELETE PLAYER (ADMIN)
+playerController.deletePlayer = async (req, res) => {
+  try {
+    const id_player = req.params.id_player;
+    const player = await Player.findByPk(id_player);
+    const user = await User.findByPk(player.user_id);
+
+    if (user.workspace_id == req.user_workspace) {
+      const deletePlayerBets = await Bet.destroy({
+        where: { player_id: player.id },
+      });
+      const deletePlayer = await Player.destroy({ where: { id: id_player } });
+      const deleteUser = await User.destroy({ where: { id: user.id } });
+
+      if (deletePlayer == 1 && deleteUser == 1 && deletePlayerBets == 1) {
+        sendSuccsessResponse(res, 200, successMsg.user.DELETE);
+      } else {
+        sendErrorResponse(res, 404, errorMsg.user.DELETE, error);
+      }
+    } else {
+      sendErrorResponse(res, 403, errorMsg.authorization.NOAUTH);
+    }
+  } catch (error) {
+    sendErrorResponse(res, 500, errorMsg.user.DELETE, error);
   }
 };
 

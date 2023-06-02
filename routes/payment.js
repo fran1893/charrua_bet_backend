@@ -20,5 +20,7 @@ router.delete(
   isAdmin,
   paymentController.deletePayment
 );
+// GET ALL PAYMENTS OF THE WORKSPACE
+router.get("/info", verifyToken, isAdmin, paymentController.getPayments);
 
 module.exports = router;

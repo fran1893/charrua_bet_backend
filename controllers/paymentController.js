@@ -75,4 +75,46 @@ paymentController.deletePayment = async (req, res) => {
   }
 };
 
+// GET ALL PAYMENTS FROM THE WORKSPACE
+paymentController.getPayments = async (req, res) => {
+  try {
+    const workspace_id = req.user_workspace;
+
+    const payments = await Payment.findAll({
+      where: { workspace_id: workspace_id },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      include: [
+        {
+          model: Game,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+          include: [
+            {
+              model: Team,
+              as: "home_team",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+            {
+              model: Team,
+              as: "away_team",
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
+        },
+      ],
+    });
+
+    sendSuccsessResponse(res, 200, payments);
+  } catch (error) {
+    sendErrorResponse(res, 500, errorMsg.payment.GETALL);
+  }
+};
+
 module.exports = paymentController;

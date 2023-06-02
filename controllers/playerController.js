@@ -96,7 +96,7 @@ playerController.deletePlayer = async (req, res) => {
       if (deletePlayer == 1 && deleteUser == 1 && deletePlayerBets == 1) {
         sendSuccsessResponse(res, 200, successMsg.user.DELETE);
       } else {
-        sendErrorResponse(res, 404, errorMsg.user.DELETE, error);
+        sendErrorResponse(res, 404, errorMsg.user.DELETE);
       }
     } else {
       sendErrorResponse(res, 403, errorMsg.authorization.NOAUTH);

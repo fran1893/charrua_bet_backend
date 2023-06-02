@@ -48,7 +48,30 @@ paymentController.updatePayment = async (req, res) => {
       sendErrorResponse(res, 401, errorMsg.authorization.NOAUTH);
     }
   } catch (error) {
-    sendErrorResponse(res, 500, errorMsg.payment.UPDATE);
+    sendErrorResponse(res, 500, errorMsg.payment.UPDATE, error);
+  }
+};
+
+// DELETE PAYMENT
+paymentController.deletePayment = async (req, res) => {
+  try {
+    const paymentId = req.params.payment_id;
+    const workspace_id = req.user_workspace;
+    const payment = await Payment.findByPk(paymentId);
+
+    if (workspace_id == payment.workspace_id) {
+      const deletePayment = await Payment.destroy({ where: { id: paymentId } });
+
+      if (deletePayment == 1) {
+        return sendSuccsessResponse(res, 200, successMsg.payment.DELETE);
+      } else {
+        return sendErrorResponse(res, 400, errorMsg.payment.REQUIERED);
+      }
+    } else {
+      sendErrorResponse(res, 401, errorMsg.authorization.NOAUTH);
+    }
+  } catch (error) {
+    sendErrorResponse(res, 500, errorMsg.payment.DELETE, error);
   }
 };
 

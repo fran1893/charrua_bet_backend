@@ -33,7 +33,15 @@ const errorMsg = {
   },
   balance: {
     UPDATE: "Error updating balance",
-    REQUIRED: "Complete balance field correctly"
+    REQUIRED: "Complete balance field correctly",
+  },
+  payment: {
+    CREATE: "Error creating payment",
+    UPDATE: "Error updating payment",
+    DELETE: "Error deleting payment",
+    GETALL: "Error retreiving all payments",
+    NOTFOUND: "Payment not found",
+    REQUIERED: "Complete payment fields correctly",
   },
 };
 
@@ -53,8 +61,13 @@ const successMsg = {
     DELETE: "Bet deleted successfully",
   },
   balance: {
-    UPDATE: "Updated balance successfully"
-  }
+    UPDATE: "Updated balance successfully",
+  },
+  payment: {
+    CREATE: "Payment created successfully",
+    UPDATE: "Payment updated successfully",
+    DELETE: "Payment deleted successfully",
+  },
 };
 
 module.exports = {

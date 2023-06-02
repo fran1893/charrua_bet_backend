@@ -5,6 +5,7 @@ const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 const betRouter = require("./routes/bets");
 const playerRouter = require("./routes/player");
+const paymentRouter = require("./routes/payment");
 
 /* home page */
 router.use("/", indexRouter);
@@ -14,7 +15,11 @@ router.use("/auth", authRouter);
 
 /* bets */
 router.use("/bets", betRouter);
-/* balance */
+
+/* players */
 router.use("/player", playerRouter);
+
+/* players */
+router.use("/payments", paymentRouter);
 
 module.exports = router;

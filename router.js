@@ -7,6 +7,7 @@ const betRouter = require("./routes/bets");
 const playerRouter = require("./routes/player");
 const paymentRouter = require("./routes/payment");
 const gameRouter = require("./routes/game");
+const teamRouter = require("./routes/team");
 
 /* home page */
 router.use("/", indexRouter);
@@ -20,10 +21,13 @@ router.use("/bets", betRouter);
 /* players */
 router.use("/player", playerRouter);
 
-/* players */
+/* payments */
 router.use("/payments", paymentRouter);
 
 /* games */
 router.use("/games", gameRouter);
+
+/* teams */
+router.use("/teams", teamRouter);
 
 module.exports = router;

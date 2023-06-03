@@ -50,6 +50,13 @@ const errorMsg = {
     GETALL: "Error retreiving all games",
     NOTFOUND: "Game not found",
     REQUIERED: "Complete game fields correctly",
+  },
+  teams: {
+    CREATE: "Error creating team",
+    UPDATE: "Error updating team",
+    DELETE: "Error deleting team",
+    GETALL: "Error retreiving all teams",
+    NOTFOUND: "Team not found",
   }
 };
 
@@ -80,6 +87,11 @@ const successMsg = {
     CREATE: "Game created successfully",
     UPDATE: "Game updated successfully",
     DELETE: "Game deleted successfully",
+  },
+  teams: {
+    CREATE: "Team created successfully",
+    UPDATE: "Team updated successfully",
+    DELETE: "Team deleted successfully",
   }
 };
 

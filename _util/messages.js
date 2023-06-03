@@ -43,6 +43,14 @@ const errorMsg = {
     NOTFOUND: "Payment not found",
     REQUIERED: "Complete payment fields correctly",
   },
+  games: {
+    CREATE: "Error creating game",
+    UPDATE: "Error updating game",
+    DELETE: "Error deleting game",
+    GETALL: "Error retreiving all games",
+    NOTFOUND: "Game not found",
+    REQUIERED: "Complete game fields correctly",
+  }
 };
 
 const successMsg = {
@@ -68,6 +76,11 @@ const successMsg = {
     UPDATE: "Payment updated successfully",
     DELETE: "Payment deleted successfully",
   },
+  games: {
+    CREATE: "Game created successfully",
+    UPDATE: "Game updated successfully",
+    DELETE: "Game deleted successfully",
+  }
 };
 
 module.exports = {

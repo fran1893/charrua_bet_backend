@@ -5,6 +5,7 @@ const isPlayer = require("../middlewares/isPlayer");
 
 const router = require("express").Router();
 
+// GET ALL GAMES
 router.get("/get_all", gameController.getAll);
 
 module.exports = router;

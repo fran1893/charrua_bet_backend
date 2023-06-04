@@ -24,7 +24,7 @@ Este proyecto de apuestas deportivas es una aplicación web diseñada para permi
 
 La API backend proporciona las siguientes funcionalidades principales:
 
-- **Autenticaciónde usuarios** : Permite el registro y autenticación de usuarios mediante la generación y verificación de tokens de autenticación.
+- **Autenticación de usuarios** : Permite el registro y autenticación de usuarios mediante la generación y verificación de tokens de autenticación.
 
 - **Gestión de usuarios**: Permite crear, editar, eliminar y obtener información sobre los usuarios registrados.
 

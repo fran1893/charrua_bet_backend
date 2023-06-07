@@ -29,6 +29,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // routing
 app.use(router);
+app.use('/media/shields', express.static(path.join(__dirname, 'media/shields')));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

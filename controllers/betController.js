@@ -65,14 +65,14 @@ betController.historyUser = async (req, res) => {
               model: Team,
               as: "home_team",
               attributes: {
-                exclude: ["createdAt", "updatedAt"],
+                exclude: ["logo_url", "createdAt", "updatedAt"],
               },
             },
             {
               model: Team,
               as: "away_team",
               attributes: {
-                exclude: ["createdAt", "updatedAt"],
+                exclude: ["logo_url", "createdAt", "updatedAt"],
               },
             },
           ],
@@ -144,14 +144,14 @@ betController.historyAdmin = async (req, res) => {
               model: Team,
               as: "home_team",
               attributes: {
-                exclude: ["createdAt", "updatedAt"],
+                exclude: ["logo_url", "createdAt", "updatedAt"],
               },
             },
             {
               model: Team,
               as: "away_team",
               attributes: {
-                exclude: ["createdAt", "updatedAt"],
+                exclude: ["logo_url", "createdAt", "updatedAt"],
               },
             },
           ],
@@ -159,7 +159,7 @@ betController.historyAdmin = async (req, res) => {
         {
           model: Team,
           attributes: {
-            exclude: ["id", "createdAt", "updatedAt"],
+            exclude: ["id", "logo_url", "createdAt", "updatedAt"],
           },
         },
       ],

@@ -12,12 +12,13 @@ const paymentController = {};
 // ADD PAYMENT TO A GAME
 paymentController.addPayment = async (req, res) => {
   try {
-    const { amount, game_id } = req.body;
+    const { amount, game_id, team_id } = req.body;
 
     await Payment.create({
       amount: amount,
       workspace_id: req.user_workspace,
       game_id: game_id,
+      team_id: team_id,
     });
 
     sendSuccsessResponse(res, 200, successMsg.payment.CREATE);
@@ -107,6 +108,12 @@ paymentController.getPayments = async (req, res) => {
               },
             },
           ],
+        },
+        {
+          model: Team,
+          attributes: {
+            exclude: ["logo_url", "createdAt", "updatedAt"],
+          },
         },
       ],
     });

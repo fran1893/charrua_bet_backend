@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       Payment.belongsTo(models.Workspace, { foreignKey: "workspace_id" });
       Payment.hasMany(models.Bet, { foreignKey: "payment_id" });
       Payment.belongsTo(models.Game, { foreignKey: "game_id" });
+      Payment.belongsTo(models.Team, { foreignKey: "team_id" });
     }
   }
   Payment.init(
@@ -18,11 +19,12 @@ module.exports = (sequelize, DataTypes) => {
       amount: DataTypes.DECIMAL(11, 2),
       workspace_id: DataTypes.INTEGER,
       game_id: DataTypes.INTEGER,
+      team_id: DataTypes.INTEGER,
     },
     {
       sequelize,
       modelName: "Payment",
-      tableName: "payments"
+      tableName: "payments",
     }
   );
   return Payment;

@@ -11,17 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       Team.hasMany(models.Game, { foreignKey: "home_team_id" });
       Team.hasMany(models.Game, { foreignKey: "away_team_id" });
       Team.hasMany(models.Bet, { foreignKey: "team_id" });
+      Team.hasOne(models.Payment, { foreignKey: "team_id" });
     }
   }
   Team.init(
     {
       name: DataTypes.STRING,
-      logo_url: DataTypes.STRING
+      logo_url: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Team",
-      tableName: "teams"
+      tableName: "teams",
     }
   );
   return Team;

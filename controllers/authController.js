@@ -32,19 +32,38 @@ authController.login = async (req, res) => {
     if (!isValidPassword) {
       return sendErrorResponse(res, 404, errorMsg.authorization.BADCREDENTIALS);
     }
+    if (user.role == "player") {
+      const player = await Player.findOne({
+        where: { user_id: user.id },
+      });
+      const token = generateToken({
+        user_id: user.id,
+        user_role: user.role,
+        user_name: user.name,
+        user_workspace: user.workspace_id,
+        user_balance: player.balance,
+      });
 
-    const token = generateToken({
-      user_id: user.id,
-      user_role: user.role,
-      user_name: user.name,
-      user_workspace: user.workspace_id,
-    });
+      sendSuccsessResponse(res, 200, {
+        message: successMsg.authorization.LOGIN,
+        token: token,
+        role: user.role,
+      });
+    } else if (user.role == "admin") {
+      const token = generateToken({
+        user_id: user.id,
+        user_role: user.role,
+        user_name: user.name,
+        user_workspace: user.workspace_id,
+        user_balance: "",
+      });
 
-    sendSuccsessResponse(res, 200, {
-      message: successMsg.authorization.LOGIN,
-      token: token,
-      role: user.role,
-    });
+      sendSuccsessResponse(res, 200, {
+        message: successMsg.authorization.LOGIN,
+        token: token,
+        role: user.role,
+      });
+    }
   } catch (error) {
     sendErrorResponse(res, 500, errorMsg.authorization.LOGINFAILED, error);
   }

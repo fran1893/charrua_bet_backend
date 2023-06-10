@@ -20,7 +20,10 @@ router.delete(
   isAdmin,
   paymentController.deletePayment
 );
+// GET ALL PAYMENTS FROM A GAME BY ID
+router.get("/game-payments/:game_id", verifyToken, paymentController.getGamePayments);
+
 // GET ALL PAYMENTS OF THE WORKSPACE
-router.get("/info", verifyToken, isAdmin, paymentController.getPayments);
+router.get("/info", verifyToken, paymentController.getPayments);
 
 module.exports = router;

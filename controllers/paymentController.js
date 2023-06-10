@@ -5,7 +5,6 @@ const {
   sendErrorResponse,
 } = require("../_util/sendResponse");
 const { errorMsg, successMsg } = require("../_util/messages");
-const { where } = require("sequelize");
 
 const paymentController = {};
 
@@ -76,6 +75,40 @@ paymentController.deletePayment = async (req, res) => {
   }
 };
 
+// GET ALL PAYMENTS FROM A GAME BY ID
+paymentController.getGamePayments = async (req, res) => {
+  try {
+    const gameId = req.params.game_id;
+    const workspace_id = req.user_workspace;
+
+    const gamePayments = await Payment.findAll({
+      where: { workspace_id: workspace_id, game_id: gameId },
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      include: [
+        {
+          model: Team,
+          attributes: {
+            exclude: ["logo_url", "createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+    if (gamePayments.length > 0) {
+      sendSuccsessResponse(res, 200, gamePayments);
+    } else {
+      sendErrorResponse(
+        res,
+        500,
+        "There are no payments on that game or game does not exists"
+      );
+    }
+  } catch (error) {
+    sendErrorResponse(res, 500, errorMsg.payment.GETALL, error);
+  }
+};
+
 // GET ALL PAYMENTS FROM THE WORKSPACE
 paymentController.getPayments = async (req, res) => {
   try {
@@ -112,7 +145,7 @@ paymentController.getPayments = async (req, res) => {
         {
           model: Team,
           attributes: {
-            exclude: ["logo_url", "createdAt", "updatedAt"],
+            exclude: ["createdAt", "updatedAt"],
           },
         },
       ],

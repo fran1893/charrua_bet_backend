@@ -57,7 +57,7 @@ const errorMsg = {
     DELETE: "Error deleting team",
     GETALL: "Error retreiving all teams",
     NOTFOUND: "Team not found",
-  }
+  },
 };
 
 const successMsg = {
@@ -74,6 +74,8 @@ const successMsg = {
     CREATE: "Bet created successfully",
     UPDATE: "Bet updated successfully",
     DELETE: "Bet deleted successfully",
+    WONBET: "Bet won, added amount to player balance",
+    LOSTBET: "Bet lost, deducted amount to player balance",
   },
   balance: {
     UPDATE: "Updated balance successfully",
@@ -92,7 +94,7 @@ const successMsg = {
     CREATE: "Team created successfully",
     UPDATE: "Team updated successfully",
     DELETE: "Team deleted successfully",
-  }
+  },
 };
 
 module.exports = {

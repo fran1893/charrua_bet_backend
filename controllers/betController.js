@@ -102,6 +102,87 @@ betController.historyUser = async (req, res) => {
   }
 };
 
+// GET BET BY ID
+betController.geBetById = async (req, res) => {
+  try {
+    const betId = req.params.bet_id;
+    const bet = await Bet.findByPk(betId, {
+      attributes: {
+        exclude: [
+          "player_id",
+          "game_id",
+          "team_id",
+          "payment_id",
+          "workspace_id",
+          "createdAt",
+          "updatedAt",
+        ],
+      },
+      include: [
+        {
+          model: Payment,
+          attributes: {
+            exclude: [
+              "id",
+              "workspace_id",
+              "game_id",
+              "team_id",
+              "createdAt",
+              "updatedAt",
+            ],
+          },
+          include: {
+            model: Team,
+            attributes: {
+              exclude: ["logo_url", "id", "createdAt", "updatedAt"],
+            },
+          },
+        },
+        {
+          model: Workspace,
+          attributes: {
+            exclude: ["id", "createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: Game,
+          attributes: {
+            exclude: ["home_team_id", "away_team_id", "createdAt", "updatedAt"],
+          },
+          include: [
+            {
+              model: Team,
+              as: "home_team",
+              attributes: {
+                exclude: ["logo_url", "createdAt", "updatedAt"],
+              },
+            },
+            {
+              model: Team,
+              as: "away_team",
+              attributes: {
+                exclude: ["logo_url", "createdAt", "updatedAt"],
+              },
+            },
+          ],
+        },
+        {
+          model: Team,
+          attributes: {
+            exclude: ["logo_url", "id", "createdAt", "updatedAt"],
+          },
+        },
+      ],
+    });
+    if (!bet) {
+      return sendErrorResponse(res, 404, errorMsg.bet.NOTFOUND);
+    }
+    sendSuccsessResponse(res, 200, bet);
+  } catch (error) {
+    sendErrorResponse(res, 500, errorMsg.bet.GET, error);
+  }
+};
+
 // SHOW BET HISTORY OF THE WORKSPACE (ADMIN)
 betController.historyAdmin = async (req, res) => {
   try {
@@ -202,6 +283,61 @@ betController.makeBet = async (req, res) => {
     return sendSuccsessResponse(res, 200, successMsg.bet.CREATE);
   } catch (error) {
     return sendErrorResponse(res, 500, errorMsg.bet.CREATE, error);
+  }
+};
+
+// FINALIZE A BET BY ID
+betController.finalizeBet = async (req, res) => {
+  try {
+    const betId = req.params.bet_id;
+    const userId = req.user_id;
+
+    const bet = await Bet.findByPk(betId);
+    const player = await Player.findOne({
+      where: { user_id: userId },
+    });
+    // Check if bet belongs to player
+    if (bet.player_id == player.id) {
+      const updateGame = await Game.update(
+        { result: "home", finished: "true" },
+        { where: { id: bet.game_id } }
+      );
+
+      const payment = await Payment.findOne({
+        where: { id: bet.payment_id },
+      });
+      const game = await Game.findOne({
+        where: { id: bet.game_id },
+      });
+
+      // Check if player won or lost
+      if (game.home_team_id == bet.team_id) {
+        const amount = +player.balance + bet.amount * payment.amount;
+        const addBalance = await Player.update(
+          { balance: amount },
+          { where: { id: player.id } }
+        );
+        if (addBalance == 1) {
+          sendSuccsessResponse(res, 200, successMsg.bet.WONBET);
+        } else {
+          sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
+        }
+      } else if (game.home_team_id != bet.team_id) {
+        const amount = +player.balance - bet.amount;
+        const deductBalance = await Player.update(
+          { balance: amount },
+          { where: { id: player.id } }
+        );
+
+        if (deductBalance == 1) {
+          sendSuccsessResponse(res, 200, successMsg.bet.LOSTBET);
+        } else {
+          sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
+        }
+      }
+    }
+  } catch (error) {
+    sendErrorResponse(res, 500, "Unable to finalize bet", error);
   }
 };
 

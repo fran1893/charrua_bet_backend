@@ -16,5 +16,9 @@ router.get(
 );
 // MAKE A BET (PLAYER)
 router.post("/bet", verifyToken, isPlayer, betController.makeBet);
+// GET BET BY ID
+router.get("/bet/:bet_id", verifyToken, betController.geBetById);
+// FINALIZE A BET BY ID
+router.put("/bet/finalize/:bet_id", verifyToken, isPlayer, betController.finalizeBet);
 
 module.exports = router;

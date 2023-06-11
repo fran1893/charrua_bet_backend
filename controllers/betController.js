@@ -318,7 +318,7 @@ betController.finalizeBet = async (req, res) => {
           { where: { id: player.id } }
         );
         if (addBalance == 1) {
-          sendSuccsessResponse(res, 200, successMsg.bet.WONBET);
+          sendSuccsessResponse(res, 200, {message: successMsg.bet.WONBET, new_balance: amount});
         } else {
           sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
         }
@@ -330,7 +330,7 @@ betController.finalizeBet = async (req, res) => {
         );
 
         if (deductBalance == 1) {
-          sendSuccsessResponse(res, 200, successMsg.bet.LOSTBET);
+          sendSuccsessResponse(res, 200, {message: successMsg.bet.LOSTBET, new_balance: amount});
         } else {
           sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
         }

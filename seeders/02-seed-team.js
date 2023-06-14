@@ -9,37 +9,37 @@ module.exports = {
       [
         {
           name: "Real Madrid",
-          logo_url:"/media/shields/real_madrid.png",
+          logo_url:"media/shields/real_madrid.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Atlético de madrid",
-          logo_url:"/media/shields/atletico.png",
+          logo_url:"media/shields/atletico.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Chelsea FC",
-          logo_url:"/media/shields/chelsea.png",
+          logo_url:"media/shields/chelsea.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Leeds United",
-          logo_url:"/media/shields/leeds.png",
+          logo_url:"media/shields/leeds.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "Arsenal",
-          logo_url:"/media/shields/arsenal.png",
+          logo_url:"media/shields/arsenal.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           name: "AFC Bournemount",
-          logo_url:"/media/shields/bournemount.png",
+          logo_url:"media/shields/bournemount.png",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

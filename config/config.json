@@ -1,10 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
-    "database": "charrua_bet",
-    "host": "127.0.0.1",
-    "port": 3306,
+    "password": "PGitwpyZGcY1wQcOhYxh",
+    "database": "railway",
+    "host": "containers-us-west-52.railway.app",
+    "port": 6622,
     "dialect": "mysql"
   },
   "test": {
@@ -16,9 +16,10 @@
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": "root",
+    "database": "charrua_bet",
     "host": "127.0.0.1",
+    "port": 3306,
     "dialect": "mysql"
   }
 }

@@ -318,7 +318,10 @@ betController.finalizeBet = async (req, res) => {
           { where: { id: player.id } }
         );
         if (addBalance == 1) {
-          sendSuccsessResponse(res, 200, {message: successMsg.bet.WONBET, new_balance: amount});
+          sendSuccsessResponse(res, 200, {
+            message: successMsg.bet.WONBET,
+            new_balance: amount,
+          });
         } else {
           sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
         }
@@ -330,11 +333,16 @@ betController.finalizeBet = async (req, res) => {
         );
 
         if (deductBalance == 1) {
-          sendSuccsessResponse(res, 200, {message: successMsg.bet.LOSTBET, new_balance: amount});
+          sendSuccsessResponse(res, 200, {
+            message: successMsg.bet.LOSTBET,
+            new_balance: amount,
+          });
         } else {
           sendErrorResponse(res, 500, errorMsg.balance.UPDATE);
         }
       }
+    } else {
+      sendErrorResponse(res, 200, errorMsg.authorization.NOAUTH);
     }
   } catch (error) {
     sendErrorResponse(res, 500, "Unable to finalize bet", error);

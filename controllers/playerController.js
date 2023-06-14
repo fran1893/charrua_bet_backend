@@ -85,15 +85,20 @@ playerController.deletePlayer = async (req, res) => {
     const id_player = req.params.id_player;
     const player = await Player.findByPk(id_player);
     const user = await User.findByPk(player.user_id);
+    const playerBets = await Bet.findAll({
+      where: { player_id: player.id },
+    });
 
     if (user.workspace_id == req.user_workspace) {
-      const deletePlayerBets = await Bet.destroy({
-        where: { player_id: player.id },
-      });
+      if (playerBets.length > 0) {
+        const deletePlayerBets = await Bet.destroy({
+          where: { player_id: player.id },
+        });
+      }
       const deletePlayer = await Player.destroy({ where: { id: id_player } });
       const deleteUser = await User.destroy({ where: { id: user.id } });
 
-      if (deletePlayer == 1 && deleteUser == 1 && deletePlayerBets == 1) {
+      if (deletePlayer == 1 && deleteUser == 1) {
         sendSuccsessResponse(res, 200, successMsg.user.DELETE);
       } else {
         sendErrorResponse(res, 404, errorMsg.user.DELETE);

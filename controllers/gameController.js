@@ -5,6 +5,7 @@ const {
   sendErrorResponse,
 } = require("../_util/sendResponse");
 const { errorMsg, successMsg } = require("../_util/messages");
+const e = require("express");
 
 const gameController = {};
 
@@ -34,7 +35,7 @@ gameController.getAll = async (req, res) => {
     });
     sendSuccsessResponse(res, 200, games);
   } catch (error) {
-    sendErrorResponse(res, 500, errorMsg.games.GETALL);
+    sendErrorResponse(res, 500, errorMsg.games.GETALL, error);
   }
 };
 

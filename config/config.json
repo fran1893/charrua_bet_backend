@@ -1,10 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "PGitwpyZGcY1wQcOhYxh",
+    "password": "4651HCgbhFDbgA244BG1FfEDF4HEah-3",
     "database": "railway",
-    "host": "containers-us-west-52.railway.app",
-    "port": 6622,
+    "host": "monorail.proxy.rlwy.net",
+    "port": 53078,
     "dialect": "mysql"
   },
   "test": {
@@ -16,7 +16,7 @@
   },
   "production": {
     "username": "root",
-    "password": "PGitwpyZGcY1wQcOhYxh",
+    "password": "root",
     "database": "railway",
     "host": "containers-us-west-52.railway.app",
     "port": 6622,
